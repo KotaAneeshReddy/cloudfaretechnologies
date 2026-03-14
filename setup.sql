@@ -3,10 +3,12 @@ CREATE DATABASE IF NOT EXISTS cloudfare;
 USE cloudfare;
 
 -- Drop tables if they exist to start fresh
+DROP TABLE IF EXISTS applications;
 DROP TABLE IF EXISTS courses;
 DROP TABLE IF EXISTS jobs;
 DROP TABLE IF EXISTS internships;
 DROP TABLE IF EXISTS testimonials;
+DROP TABLE IF EXISTS enrollments;
 
 -- Create Courses Table
 CREATE TABLE courses (
@@ -27,7 +29,9 @@ CREATE TABLE jobs (
     company VARCHAR(255),
     location VARCHAR(255),
     type VARCHAR(50),
-    description TEXT
+    description TEXT,
+    requirements TEXT,
+    responsibilities TEXT
 );
 
 -- Create Internships Table
@@ -36,7 +40,24 @@ CREATE TABLE internships (
     title VARCHAR(255) NOT NULL,
     duration VARCHAR(50),
     location VARCHAR(255),
-    description TEXT
+    description TEXT,
+    requirements TEXT,
+    responsibilities TEXT
+);
+
+-- Create Applications Table
+CREATE TABLE applications (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    job_id BIGINT,
+    internship_id BIGINT,
+    resume_url VARCHAR(512),
+    cover_letter TEXT,
+    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (job_id) REFERENCES jobs(id),
+    FOREIGN KEY (internship_id) REFERENCES internships(id)
 );
 
 -- Create Testimonials Table
@@ -47,6 +68,16 @@ CREATE TABLE testimonials (
     company VARCHAR(100),
     content TEXT,
     avatar_url VARCHAR(512)
+);
+
+-- Create Enrollments Table
+CREATE TABLE enrollments (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    course_name VARCHAR(255),
+    enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Insert Training Programs (Courses & Internships)
@@ -80,22 +111,68 @@ INSERT INTO courses (title, description, duration, image, syllabus, career_oppor
 ('JavaScript Full Stack Development Internship', 'Modern web application development using Node.js, Express, and React.', '6 Months', 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "JavaScript Mastery", "topics": ["ES6+ fundamentals", "Async programming", "React.js frontend"]}, {"title": "Backend Engineering", "topics": ["Node.js and Express", "MongoDB and SQL", "REST API development"]}]}', 'JavaScript Developer, Full Stack Developer, Frontend Developer, Backend Developer (Node.js)');
 
 -- Insert Initial Job Openings
-INSERT INTO jobs (title, company, location, type, description) VALUES 
-('Senior Java Developer', 'Cloudfare Technologies', 'Hyderabad, India', 'Full-time', 'Seeking an experienced Java developer with expertise in Spring Boot and Microservices.'),
-('AI Engineer', 'Cloudfare Technologies', 'Remote', 'Full-time', 'Build and deploy generative AI models using Python and modern frameworks.'),
-('Python Full Stack Developer', 'Propel Systems', 'Hyderabad', 'Full-time', 'Build scalable web applications using Django backend and React frontend.'),
-('DevOps Engineer', 'CloudScale Solutions', 'Bangalore', 'Full-time', 'Manage enterprise cloud infrastructure and CI/CD pipelines on AWS.'),
-('Cybersecurity Analyst', 'SafeGuard Network', 'Remote', 'Full-time', 'Conduct vulnerability assessments and secure mission-critical enterprise systems.'),
-('UI/UX Designer', 'VitalsIQ', 'Hyderabad', 'Full-time', 'Design intuitive user interfaces and prototypes for global-scale web and mobile apps.');
+INSERT INTO jobs (title, company, location, type, description, requirements, responsibilities) VALUES 
+('Senior Java Developer', 'Cloudfare Technologies', 'Hyderabad, India', 'Full-time', 
+'We are looking for a Senior Java Developer to join our core engineering team. You will be responsible for building scalable microservices and leading the transition to a more resilient cloud architecture.', 
+'Strong proficiency in Java 17 and Spring Boot. Experience with Microservices, Docker, and Kubernetes. Deep understanding of SQL/NoSQL databases. Minimum 5 years of industry experience.', 
+'Develop and maintain high-quality microservices. Collaborate with cross-functional teams to design scalable architectures. Mentor junior developers and conduct code reviews.'),
+
+('AI Engineer', 'Cloudfare Technologies', 'Remote', 'Full-time', 
+'Join our AI research and development team to build next-generation Generative AI solutions. You will work on Large Language Models, prompt engineering, and autonomous agent frameworks.', 
+'Proficiency in Python and AI frameworks (PyTorch, TensorFlow, or LangChain). Experience with LLMs and Vector Databases. Strong problem-solving skills.', 
+'Design and implement AI-driven features. Optimize LLM performance and cost. Participate in research and implementation of new AI papers.'),
+
+('Python Full Stack Developer', 'Propel Systems', 'Hyderabad', 'Full-time', 
+'Seeking a Full Stack Developer who loves Python. You will build enterprise-grade web applications from scratch, using Django/FastAPI for the backend and React for the frontend.', 
+'Expertise in Python (Django or FastAPI). Proficiency in React.js and modern CSS. Experience with RESTful API design.', 
+'Build robust and scalable full-stack applications. Design and implement efficient database schemas. Collaborate with UI/UX designers to implement pixel-perfect interfaces.'),
+
+('DevOps Engineer', 'CloudScale Solutions', 'Bangalore', 'Full-time', 
+'Manage and scale our global cloud infrastructure. You will be responsible for CI/CD pipelines, security audits, and ensuring 99.9% uptime for our production systems.', 
+'Deep knowledge of AWS services. Experience with Terraform and Ansible. Proficiency in Linux administration and Shell scripting.', 
+'Automate infrastructure provisioning and deployment. Monitor system performance and troubleshoot issues. Implement and maintain security best practices.'),
+
+('Cybersecurity Analyst', 'SafeGuard Network', 'Remote', 'Full-time', 
+'Protect our enterprise clients from evolving cyber threats. You will focus on vulnerability assessments, penetration testing, and implementing zero-trust security models.', 
+'Strong knowledge of network security and encryption. Experience with security tools like Splunk or Burp Suite. Certifications like CEH or CISSP are a plus.', 
+'Perform regular security audits and vulnerability scans. Respond to security incidents and lead forensic investigations. Develop security policies and documentation.'),
+
+('UI/UX Designer', 'VitalsIQ', 'Hyderabad', 'Full-time', 
+'Design intuitive and beautiful user experiences for our global-scale web and mobile apps. You will work closely with product managers and engineers to bring our vision to life.', 
+'Proficiency in Figma or Adobe XD. Strong portfolio demonstrating UX research and UI design skills. Understanding of design systems.', 
+'Create wireframes, prototypes, and high-fidelity designs. Conduct user research and usability testing. Maintain and evolve the company design system.');
 
 -- Insert Initial Internship Programs
-INSERT INTO internships (title, duration, location, description) VALUES 
-('Full Stack Web Internship', '3 Months', 'Hyderabad / Remote', 'Work on live client projects using React and Node.js.'),
-('Python for Data Science Internship', '4 Months', 'Bangalore', 'Learn data analysis and visualization with real-world datasets.'),
-('Generative AI Internship', '3 Months', 'Remote', 'Research and develop autonomous AI agents and LLM-driven integrations.'),
-('Cybersecurity Internship', '4 Months', 'Hyderabad', 'Hands-on training in ethical hacking, penetration testing, and network security.'),
-('React Frontend Internship', '3 Months', 'Remote', 'Build modern interactive user interfaces using React.js and Tailwind CSS.'),
-('Salesforce Administrator Internship', '4 Months', 'Bangalore', 'Manage enterprise CRM workflows, dashboards, and cloud configurations.');
+INSERT INTO internships (title, duration, location, description, requirements, responsibilities) VALUES 
+('Full Stack Web Internship', '3 Months', 'Hyderabad / Remote', 
+'Gain hands-on experience by working on live client projects. You will learn the full lifecycle of a modern web application using React and Node.js.', 
+'Basic knowledge of HTML, CSS, and JavaScript. Understanding of React fundamentals is a plus. Passion for building web applications.', 
+'Develop and test UI components. Assist in backend API development. Participate in daily standups and sprint planning.'),
+
+('Python for Data Science Internship', '4 Months', 'Bangalore', 
+'Dive deep into data analysis and visualization. Work with real-world datasets and learn how to extract meaningful insights using Python and its powerful libraries.', 
+'Proficiency in Python. Familiarity with Pandas, NumPy, and Matplotlib. Basic understanding of statistics.', 
+'Clean and preprocess datasets. Perform exploratory data analysis. Create data visualizations and reports.'),
+
+('Generative AI Internship', '3 Months', 'Remote', 
+'Research and develop autonomous AI agents. This program focuses on cutting-edge LLM integrations and building the next generation of intelligent tools.', 
+'Strong Python skills. Interest in AI and Machine Learning. Familiarity with OpenAI API or LangChain is helpful.', 
+'Implement LLM-driven features and agents. Test and evaluate model performance. Document AI workflows and experiments.'),
+
+('Cybersecurity Internship', '4 Months', 'Hyderabad', 
+'Get real-world training in ethical hacking and network security. You will learn how to identify and remediate security vulnerabilities in a controlled environment.', 
+'Knowledge of networking and OS fundamentals. Interest in cybersecurity and ethical hacking. Basic Linux skills.', 
+'Monitor network traffic for suspicious activity. Participate in vulnerability assessment labs. Learn and use security auditing tools.'),
+
+('React Frontend Internship', '3 Months', 'Remote', 
+'Build modern and interactive user interfaces. You will work closely with our design team to implement pixel-perfect React components with Tailwind CSS.', 
+'Solid understanding of modern JavaScript and React. Proficiency in CSS and responsive design. Eye for detail.', 
+'Implement UI components based on Figma designs. Optimize frontend performance. Collaborate with backend teams for API integration.'),
+
+('Salesforce Administrator Internship', '4 Months', 'Bangalore', 
+'Master the Salesforce platform. You will learn how to manage enterprise CRM workflows, build dashboards, and configure cloud environments for global clients.', 
+'Logical thinking and problem-solving skills. Interest in CRM systems. Basic understanding of business processes.', 
+'Configure Salesforce objects and fields. Create reports and dashboards. Automate business processes using Salesforce Flow.');
 
 -- Insert Testimonials
 INSERT INTO testimonials (name, role, company, content, avatar_url) VALUES 

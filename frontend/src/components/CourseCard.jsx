@@ -3,7 +3,7 @@ import { Clock, User, ArrowRight, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ course, onEnroll }) => {
   const navigate = useNavigate();
   return (
     <motion.div 
@@ -47,14 +47,23 @@ const CourseCard = ({ course }) => {
         </div>
       </div>
 
-      {/* Button */}
-      <div className="pt-8 mt-auto">
+      {/* Buttons */}
+      <div className="pt-8 mt-auto grid grid-cols-2 gap-4">
         <button 
           onClick={() => navigate(`/course/${course.id}`)}
-          className="w-full btn-primary !rounded-xl group/btn"
+          className="btn-secondary !rounded-xl !py-3 !text-xs uppercase tracking-widest"
         >
-          <span>Explore Curriculum</span>
-          <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+          Details
+        </button>
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            onEnroll();
+          }}
+          className="btn-primary !rounded-xl !py-3 !text-xs uppercase tracking-widest group/btn"
+        >
+          <span>Enroll</span>
+          <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
         </button>
       </div>
     </motion.div>

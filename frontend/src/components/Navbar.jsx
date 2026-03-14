@@ -26,19 +26,24 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled || location.pathname !== '/'
-        ? 'bg-primary-navy/95 backdrop-blur-lg border-b border-white/10 py-3'
-        : 'bg-transparent py-5'
+      ? 'bg-primary-navy/95 backdrop-blur-lg border-b border-white/10 py-3'
+      : 'bg-transparent py-5'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="p-2.5 bg-gradient-to-br from-accent-purple to-accent-blue rounded-xl text-white shadow-lg shadow-accent-purple/20 group-hover:scale-110 transition-transform duration-300">
-                <Zap size={24} fill="currentColor" />
+              <div className="p-2 bg-gradient-to-br from-accent-purple to-accent-blue rounded-lg text-white">
+                <Zap size={22} fill="currentColor" />
               </div>
-              <span className="text-2xl font-extrabold text-white tracking-tighter">
-                CLOUD<span className="text-accent-blue">FARE</span>
-              </span>
+              <div className="flex flex-col leading-none">
+                <span className="text-2xl font-black text-white tracking-[0.02em] uppercase font-display">
+                  CLOUD<span className="text-accent-blue">FARE</span>
+                </span>
+                <span className="text-[9px] font-bold text-slate-400 tracking-[0.78em] uppercase mt-1">
+                  TECHNOLOGIES
+                </span>
+              </div>
             </Link>
           </div>
 
@@ -94,8 +99,8 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   className={`block px-4 py-3 rounded-xl text-lg font-medium transition-all ${location.pathname === link.path
-                      ? 'bg-accent-blue/10 text-accent-blue'
-                      : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                    ? 'bg-accent-blue/10 text-accent-blue'
+                    : 'text-gray-300 hover:bg-white/5 hover:text-white'
                     }`}
                   onClick={() => setIsOpen(false)}
                 >

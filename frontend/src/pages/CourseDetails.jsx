@@ -13,12 +13,14 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { getCourseById } from '../api';
+import EnrollForm from '../components/EnrollForm';
 
 const CourseDetails = () => {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeModule, setActiveModule] = useState(0);
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -109,7 +111,10 @@ const CourseDetails = () => {
                 </div>
               </div>
 
-              <button className="btn-primary !px-12 !py-5 text-lg group">
+              <button 
+                onClick={() => setIsEnrollModalOpen(true)}
+                className="btn-primary !px-12 !py-5 text-lg group"
+              >
                 <span>Enroll in Program</span>
                 <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
@@ -230,6 +235,12 @@ const CourseDetails = () => {
           </div>
         </div>
       </section>
+
+      <EnrollForm 
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName={course.title}
+      />
     </div>
   );
 };

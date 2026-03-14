@@ -1,8 +1,54 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Globe, MessageSquare, Clock } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Phone, MapPin, Send, Globe, MessageSquare, Clock, CheckCircle, AlertCircle } from 'lucide-react';
+import { sendContactMessage } from '../api';
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: 'Training Inquiry',
+        message: ''
+    });
+    const [status, setStatus] = useState('idle'); // idle, loading, success, error
+    const [errors, setErrors] = useState({});
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.name.trim()) newErrors.name = "Name is required";
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) newErrors.email = "Invalid email address";
+
+        if (!formData.message.trim()) newErrors.message = "Message is required";
+        else if (formData.message.length < 10) newErrors.message = "Message is too short";
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validateForm()) return;
+
+        setStatus('loading');
+        try {
+            await sendContactMessage(formData);
+            setStatus('success');
+            setFormData({ name: '', email: '', subject: 'Training Inquiry', message: '' });
+            setErrors({});
+            setTimeout(() => setStatus('idle'), 5000);
+        } catch (error) {
+            console.error('Error sending message:', error);
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 5000);
+        }
+    };
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
     return (
         <div className="bg-bg-light min-h-screen">
             {/* Header */}
@@ -61,18 +107,6 @@ const Contact = () => {
                                     sub="Telangana"
                                 />
                             </div>
-
-                            {/* <div className="mt-16 pt-10 border-t border-slate-100">
-                                <div className="flex items-center space-x-2 text-slate-400 text-sm font-bold uppercase tracking-widest mb-6">
-                                    <Globe size={16} />
-                                    <span>Social Connect</span>
-                                </div>
-                                <div className="flex space-x-4">
-                                    <SocialIcon icon="IN" />
-                                    <SocialIcon icon="TW" />
-                                    <SocialIcon icon="GH" />
-                                </div>
-                            </div> */}
                         </div>
                     </div>
 
@@ -85,37 +119,101 @@ const Contact = () => {
                             </div>
                             <h3 className="text-4xl font-bold mb-12 font-display leading-[1.1]">Let's Start a <span className="text-accent-blue">Conversation.</span></h3>
 
-                            <form className="space-y-10">
+                            <form onSubmit={handleSubmit} className="space-y-10">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                     <div className="space-y-4">
                                         <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1">Full Name</label>
-                                        <input type="text" placeholder="John Doe" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-accent-blue outline-none transition-all font-medium" />
+                                        <input
+                                            required
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            type="text"
+                                            placeholder="John Doe"
+                                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-accent-blue outline-none transition-all font-medium"
+                                        />
+                                        {errors.name && <p className="text-red-500 text-xs font-bold mt-1 ml-1">{errors.name}</p>}
                                     </div>
                                     <div className="space-y-4">
                                         <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1">Email Address</label>
-                                        <input type="email" placeholder="john@example.com" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-accent-blue outline-none transition-all font-medium" />
+                                        <input
+                                            required
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            type="email"
+                                            placeholder="john@example.com"
+                                            className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-accent-blue outline-none transition-all font-medium"
+                                        />
+                                        {errors.email && <p className="text-red-500 text-xs font-bold mt-1 ml-1">{errors.email}</p>}
                                     </div>
                                 </div>
 
                                 <div className="space-y-4">
                                     <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1">Subject</label>
-                                    <select className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-accent-blue outline-none transition-all font-medium appearance-none">
+                                    <select
+                                        name="subject"
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-accent-blue outline-none transition-all font-medium appearance-none"
+                                    >
                                         <option>Training Inquiry</option>
-                                        <option>Job Opportunity</option>
-                                        <option>Internship Program</option>
                                         <option>Enterprise Solutions</option>
                                     </select>
                                 </div>
 
                                 <div className="space-y-4">
                                     <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1">Message</label>
-                                    <textarea rows="5" placeholder="How can we help you?" className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-accent-blue outline-none transition-all font-medium"></textarea>
+                                    <textarea
+                                        required
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        rows="5"
+                                        placeholder="How can we help you?"
+                                        className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-accent-blue outline-none transition-all font-medium"
+                                    ></textarea>
+                                    {errors.message && <p className="text-red-500 text-xs font-bold mt-1 ml-1">{errors.message}</p>}
                                 </div>
 
-                                <button className="btn-primary !w-full !py-5 text-lg group shadow-2xl shadow-accent-purple/30">
-                                    <span>Send Message</span>
-                                    <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                <button
+                                    disabled={status === 'loading'}
+                                    className="btn-primary !w-full !py-5 text-lg group shadow-2xl shadow-accent-purple/30 disabled:opacity-50"
+                                >
+                                    {status === 'loading' ? (
+                                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mx-auto"></div>
+                                    ) : (
+                                        <>
+                                            <span>Send Message</span>
+                                            <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                        </>
+                                    )}
                                 </button>
+
+                                <AnimatePresence mode="wait">
+                                    {status === 'success' && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            className="p-4 bg-green-50 text-green-700 rounded-2xl flex items-center justify-center space-x-2 font-bold"
+                                        >
+                                            <CheckCircle size={20} />
+                                            <span>Email sent successfully! We'll get back to you soon.</span>
+                                        </motion.div>
+                                    )}
+                                    {status === 'error' && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            className="p-4 bg-red-50 text-red-700 rounded-2xl flex items-center justify-center space-x-2 font-bold"
+                                        >
+                                            <AlertCircle size={20} />
+                                            <span>Failed to send email. Please try again or call us directly.</span>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
 
                                 <div className="flex items-center justify-center space-x-2 text-slate-400 text-sm font-medium">
                                     <Clock size={16} />

@@ -16,17 +16,24 @@ const Footer = () => {
               <div className="p-2 bg-gradient-to-br from-accent-purple to-accent-blue rounded-lg text-white">
                 <Zap size={22} fill="currentColor" />
               </div>
-              <span className="text-2xl font-extrabold tracking-tighter">CLOUDFARE<span className="text-accent-blue">TECH</span></span>
+              <div className="flex flex-col leading-none">
+                <span className="text-2xl font-black text-white tracking-[0.02em] uppercase font-display">
+                  CLOUD<span className="text-accent-blue">FARE</span>
+                </span>
+                <span className="text-[9px] font-bold text-slate-400 tracking-[0.78em] uppercase mt-1">
+                  TECHNOLOGIES
+                </span>
+              </div>
             </Link>
             <p className="text-slate-400 text-lg leading-relaxed">
               Empowering the next generation of tech professionals through elite training and
               strategic industry placements.
             </p>
-            <div className="flex space-x-5">
+            {/* <div className="flex space-x-5">
               <SocialLink href="#" icon={<Linkedin size={22} />} />
               <SocialLink href="#" icon={<Twitter size={22} />} />
               <SocialLink href="#" icon={<Github size={22} />} />
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}
@@ -44,10 +51,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-8 font-display text-white">Specializations</h3>
             <ul className="space-y-4">
-              <FooterLink to="#" label="Full Stack Java" />
-              <FooterLink to="#" label="Generative AI" />
-              <FooterLink to="#" label="Cloud & DevOps" />
-              <FooterLink to="#" label="SAP ERP" />
+              <FooterLink to="/course/13" label="Full Stack Java" />
+              <FooterLink to="/course/3" label="Generative AI" />
+              <FooterLink to="/course/5" label="Cloud & DevOps" />
+              <FooterLink to="/course/12" label="SAP ERP" />
             </ul>
           </div>
 
@@ -65,8 +72,8 @@ const Footer = () => {
         <div className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-sm">
           <p>© {new Date().getFullYear()} Cloudfare Technologies Pvt Ltd. All rights reserved.</p>
           <div className="flex space-x-8">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

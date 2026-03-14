@@ -347,24 +347,26 @@ const StatItem = ({ value, label, color }) => (
 );
 
 const PillarCard = ({ icon, title, desc, color, link, delay }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ delay }}
-    viewport={{ once: true }}
-    whileHover={{ y: -12 }}
-    className="card-premium group cursor-pointer relative overflow-hidden h-full"
-  >
-    <div className={`w-16 h-16 ${color} rounded-2xl flex items-center justify-center mb-8 shadow-xl shadow-${color}/20 group-hover:scale-110 transition-transform duration-500`}>
-      {icon}
-    </div>
-    <h3 className="text-2xl font-bold mb-4 font-display">{title}</h3>
-    <p className="text-slate-500 text-base leading-relaxed mb-8">{desc}</p>
-    <Link to={link} className="text-accent-purple font-bold text-sm flex items-center space-x-2 group/link">
-      <span className="group-hover/link:mr-2 transition-all">LEARN MORE</span>
-      <ArrowRight size={16} />
-    </Link>
-  </motion.div>
+  <Link to={link} className="block h-full">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+      viewport={{ once: true }}
+      whileHover={{ y: -12 }}
+      className="card-premium group cursor-pointer relative overflow-hidden h-full"
+    >
+      <div className={`w-16 h-16 ${color} rounded-2xl flex items-center justify-center mb-8 shadow-xl shadow-${color}/20 group-hover:scale-110 transition-transform duration-500`}>
+        {icon}
+      </div>
+      <h3 className="text-2xl font-bold mb-4 font-display">{title}</h3>
+      <p className="text-slate-500 text-base leading-relaxed mb-8">{desc}</p>
+      <div className="text-accent-purple font-bold text-sm flex items-center space-x-2 group/link">
+        <span className="group-hover/link:mr-2 transition-all uppercase tracking-wider">Learn More</span>
+        <ArrowRight size={16} />
+      </div>
+    </motion.div>
+  </Link>
 );
 
 const FeatureItem = ({ icon, title, desc }) => (

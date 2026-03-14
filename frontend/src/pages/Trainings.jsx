@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import CourseCard from '../components/CourseCard';
+import EnrollForm from '../components/EnrollForm';
 import { getCourses } from '../api';
 import { Sparkles } from 'lucide-react';
 
 const Trainings = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+
+  const handleEnrollClick = (courseTitle) => {
+    setSelectedCourse(courseTitle);
+    setIsEnrollModalOpen(true);
+  };
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -67,7 +75,11 @@ const Trainings = () => {
           >
             {courses.length > 0 ? (
               courses.map(course => (
-                <CourseCard key={course.id} course={course} />
+                <CourseCard 
+                  key={course.id} 
+                  course={course} 
+                  onEnroll={() => handleEnrollClick(course.title)} 
+                />
               ))
             ) : (
               <div className="col-span-full card-premium text-center py-24">
@@ -77,6 +89,12 @@ const Trainings = () => {
           </motion.div>
         )}
       </div>
+
+      <EnrollForm 
+        isOpen={isEnrollModalOpen}
+        onClose={() => setIsEnrollModalOpen(false)}
+        courseName={selectedCourse}
+      />
     </div>
   );
 };

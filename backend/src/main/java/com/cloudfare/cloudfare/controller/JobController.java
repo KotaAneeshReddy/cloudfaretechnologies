@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/jobs")
-@CrossOrigin(origins = "*")
 public class JobController {
 
     @Autowired
@@ -21,7 +20,7 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public Job getJobById(@PathVariable Long id) {
+    public Job getJobById(@PathVariable("id") Long id) {
         return jobRepository.findById(id).orElse(null);
     }
 

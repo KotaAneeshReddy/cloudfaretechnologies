@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -9,22 +9,43 @@ import Internships from './pages/Internships';
 import Enterprise from './pages/Enterprise';
 import Contact from './pages/Contact';
 import CourseDetails from './pages/CourseDetails';
+import JobDetails from './pages/JobDetails';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
+import ScrollToTop from './components/ScrollToTop';
+import PageTransition from './components/PageTransition';
+import { AnimatePresence } from 'framer-motion';
+
+function AnimatedRoutes() {
+  const location = useLocation();
+  
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+        <Route path="/trainings" element={<PageTransition><Trainings /></PageTransition>} />
+        <Route path="/course/:id" element={<PageTransition><CourseDetails /></PageTransition>} />
+        <Route path="/careers" element={<PageTransition><Careers /></PageTransition>} />
+        <Route path="/careers/:id" element={<PageTransition><JobDetails /></PageTransition>} />
+        <Route path="/internships" element={<PageTransition><Internships /></PageTransition>} />
+        <Route path="/internships/:id" element={<PageTransition><JobDetails /></PageTransition>} />
+        <Route path="/enterprise" element={<PageTransition><Enterprise /></PageTransition>} />
+        <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+        <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+        <Route path="/terms-and-conditions" element={<PageTransition><TermsAndConditions /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen bg-bg-light text-primary-navy">
         <Navbar />
         <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/trainings" element={<Trainings />} />
-            <Route path="/course/:id" element={<CourseDetails />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/internships" element={<Internships />} />
-            <Route path="/enterprise" element={<Enterprise />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
+          <AnimatedRoutes />
         </main>
         <Footer />
       </div>

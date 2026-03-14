@@ -19,5 +19,10 @@ public class Job {
     private String company;
     private String location;
     private String type;
+    @Column(columnDefinition = "TEXT")
     private String description;
+    @Column(columnDefinition = "TEXT")
+    private String requirements;
+    @Column(columnDefinition = "TEXT")
+    private String responsibilities;
 }

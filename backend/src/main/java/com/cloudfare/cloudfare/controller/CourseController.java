@@ -9,7 +9,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/courses")
-@CrossOrigin(origins = "*")
 public class CourseController {
 
     @Autowired
@@ -21,7 +20,7 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public Course getCourseById(@PathVariable Long id) {
+    public Course getCourseById(@PathVariable("id") Long id) {
         return courseRepository.findById(id).orElse(null);
     }
 
