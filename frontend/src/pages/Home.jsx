@@ -131,14 +131,19 @@ const Home = () => {
       {/* Clients / Trusted By Section */}
       <section className="py-16 mb-16 bg-white border-y border-slate-100 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center text-slate-400 font-bold text-xs uppercase tracking-[0.3em] mb-12"
-          >
-            Empowering Careers at Global Leaders
-          </motion.p>
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-accent-blue/5 text-accent-blue-dark border border-accent-blue/10 mb-6 uppercase tracking-[0.2em]"
+            >
+              Industry Partnerships
+            </motion.div>
+            <h2 className="text-3xl md:text-4xl font-black text-primary-navy font-display tracking-tight leading-tight">
+              Empowering Careers at <span className="gradient-text italic px-2">Global Leaders</span>
+            </h2>
+          </div>
 
           <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
             <LogoItem name="Allied Mobility" logo={AlliedLogo} delay={0.1} />
@@ -381,16 +386,16 @@ const LogoItem = ({ name, icon, logo, delay }) => (
     transition={{ delay, duration: 0.5 }}
     viewport={{ once: true }}
     whileHover={{ scale: 1.05 }}
-    className="flex items-center space-x-3 text-slate-400 hover:text-primary-navy grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer group"
+    className="flex flex-col items-center space-y-4 text-slate-500 hover:text-primary-navy transition-all duration-300 cursor-pointer group"
   >
-    <div className="w-12 h-12 flex items-center justify-center p-2 rounded-xl bg-slate-50 group-hover:bg-white group-hover:shadow-lg transition-all duration-300">
+    <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center p-4 rounded-3xl bg-white shadow-soft group-hover:shadow-premium border border-slate-50 transition-all duration-300">
       {logo ? (
         <img src={logo} alt={name} className="max-w-full max-h-full object-contain" />
       ) : (
         icon
       )}
     </div>
-    <span className="font-display font-black tracking-tighter text-sm uppercase">{name}</span>
+    <span className="font-bold tracking-tight text-[11px] md:text-sm uppercase text-slate-400 group-hover:text-primary-navy transition-colors">{name}</span>
   </motion.div>
 );
 
