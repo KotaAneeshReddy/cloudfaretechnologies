@@ -25,6 +25,13 @@ import {
 import Hero from '../components/Hero';
 import { getTestimonials } from '../api';
 
+// Client Logos
+import AlliedLogo from '../assets/images/AlliedMobility.svg';
+import ProximusLogo from '../assets/images/Proximus.svg';
+import QuickLogo from '../assets/images/Quick.svg';
+import SubhaLogo from '../assets/images/subha.jpg';
+import DBLogo from '../assets/images/DeutscheBahn.png';
+
 const Home = () => {
   const [testimonials, setTestimonials] = React.useState([]);
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -134,11 +141,11 @@ const Home = () => {
           </motion.p>
 
           <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
-            <LogoItem name="Allied Vehicles Group" icon={<Layers size={24} />} delay={0.1} />
-            <LogoItem name="Proximus" icon={<Cpu size={24} />} delay={0.2} />
-            <LogoItem name="Quick" icon={<Zap size={24} />} delay={0.3} />
-            <LogoItem name="Subha Developers" icon={<Shield size={24} />} delay={0.4} />
-            <LogoItem name="Deutsche Bahn" icon={<Activity size={24} />} delay={0.5} />
+            <LogoItem name="Allied Mobility" logo={AlliedLogo} delay={0.1} />
+            <LogoItem name="Proximus" logo={ProximusLogo} delay={0.2} />
+            <LogoItem name="Quick" logo={QuickLogo} delay={0.3} />
+            <LogoItem name="Subha Developers" logo={SubhaLogo} delay={0.4} />
+            <LogoItem name="Deutsche Bahn" logo={DBLogo} delay={0.5} />
           </div>
         </div>
       </section>
@@ -367,7 +374,7 @@ const FeatureItem = ({ icon, title, desc }) => (
   </div>
 );
 
-const LogoItem = ({ name, icon, delay }) => (
+const LogoItem = ({ name, icon, logo, delay }) => (
   <motion.div
     initial={{ opacity: 0, y: 10 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -376,10 +383,14 @@ const LogoItem = ({ name, icon, delay }) => (
     whileHover={{ scale: 1.05 }}
     className="flex items-center space-x-3 text-slate-400 hover:text-primary-navy grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer group"
   >
-    <div className="p-2 rounded-lg bg-slate-50 group-hover:bg-accent-blue/10 transition-colors">
-      {icon}
+    <div className="w-12 h-12 flex items-center justify-center p-2 rounded-xl bg-slate-50 group-hover:bg-white group-hover:shadow-lg transition-all duration-300">
+      {logo ? (
+        <img src={logo} alt={name} className="max-w-full max-h-full object-contain" />
+      ) : (
+        icon
+      )}
     </div>
-    <span className="font-display font-black tracking-tighter text-lg uppercase">{name}</span>
+    <span className="font-display font-black tracking-tighter text-sm uppercase">{name}</span>
   </motion.div>
 );
 

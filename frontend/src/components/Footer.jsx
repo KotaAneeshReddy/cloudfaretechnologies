@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="bg-primary-navy text-white pt-24 pb-12 border-t border-white/5 overflow-hidden relative">
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-blue/10 blur-[120px] rounded-full -translate-y-1/2"></div>
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-accent-purple/10 blur-[120px] rounded-full -translate-y-1/2"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
           {/* Brand */}
@@ -19,7 +19,7 @@ const Footer = () => {
               <span className="text-2xl font-extrabold tracking-tighter">CLOUDFARE<span className="text-accent-blue">TECH</span></span>
             </Link>
             <p className="text-slate-400 text-lg leading-relaxed">
-              Empowering the next generation of tech professionals through elite training and 
+              Empowering the next generation of tech professionals through elite training and
               strategic industry placements.
             </p>
             <div className="flex space-x-5">
@@ -55,9 +55,9 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold mb-8 font-display text-white">Get in Touch</h3>
             <ul className="space-y-6">
-              <ContactItem icon={<Mail size={18} />} text="contact@cloudfaretech.com" />
-              <ContactItem icon={<Phone size={18} />} text="+91 99887 76655" />
-              <ContactItem icon={<MapPin size={18} />} text={<>Tech Hub, HITEC City,<br />Hyderabad, Telangana 500081</>} />
+              <ContactItem icon={<Mail size={18} />} text="info@cloudfaretechnologies.com" />
+              <ContactItem icon={<Phone size={18} />} text="+91 7259002535 / +91 7732075675" />
+              <ContactItem icon={<MapPin size={18} />} text={<>SS tech park, SLN terminus 8th floor, Gachibowli, <br />Hyderabad, 500032</>} />
             </ul>
           </div>
         </div>
