@@ -23,4 +23,7 @@ public class Course {
     
     @Column(columnDefinition = "TEXT")
     private String syllabus;
+
+    @Column(columnDefinition = "TEXT")
+    private String careerOpportunities;
 }

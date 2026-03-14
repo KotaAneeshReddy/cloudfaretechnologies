@@ -191,16 +191,19 @@ const CourseDetails = () => {
           {/* Sidebar Info */}
           <div className="space-y-8">
             <div className="card-premium !p-10 sticky top-32">
-              <h3 className="text-xl font-bold mb-8 font-display border-b border-slate-50 pb-4">Job Pathways</h3>
+              <h3 className="text-xl font-bold mb-8 font-display border-b border-slate-50 pb-4">Career Opportunities</h3>
               <div className="space-y-6">
-                <JobPath
-                  role="Software Engineer"
-                  company="Cloudfare Technologies"
-                />
-                <JobPath
-                  role="System Architect"
-                  company="Fortune 500 Partners"
-                />
+                {course.careerOpportunities ? (
+                  course.careerOpportunities.split(',').map((opportunity, oIdx) => (
+                    <JobPath
+                      key={oIdx}
+                      role={opportunity.trim()}
+                      company="Potential Career Path"
+                    />
+                  ))
+                ) : (
+                  <div className="text-slate-400 text-sm italic">Career paths details coming soon.</div>
+                )}
               </div>
 
               <div className="mt-12 pt-10 border-t border-slate-100 space-y-6">

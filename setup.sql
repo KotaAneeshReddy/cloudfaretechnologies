@@ -16,7 +16,8 @@ CREATE TABLE courses (
     duration VARCHAR(50),
     instructor VARCHAR(100),
     image VARCHAR(512),
-    syllabus TEXT
+    syllabus TEXT,
+    career_opportunities TEXT
 );
 
 -- Create Jobs Table
@@ -48,22 +49,53 @@ CREATE TABLE testimonials (
     avatar_url VARCHAR(512)
 );
 
--- Insert Training Programs (Courses)
-INSERT INTO courses (title, description, duration, image, syllabus) VALUES 
-('Java Full Stack Development', 'Master Java, Spring Boot, React, and MySQL to build enterprise-level applications.', '6 Months', 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Module 1: Java Fundamentals", "topics": ["JDK and JVM Architecture", "Core Syntax and Data Types", "OOP Concepts", "Exception Handling", "Collections Framework"]}, {"title": "Module 2: Advanced Java & Backend", "topics": ["Multithreading", "JDBC and Hibernate", "Spring Framework & Spring Boot", "RESTful API Design", "Microservices Architecture"]}, {"title": "Module 3: Frontend Mastery", "topics": ["HTML5 & CSS3 Essentials", "JavaScript (ES6+)", "React Hooks and State Management", "Tailwind CSS Design System", "Axios Integration"]}]}'),
-('Python Generative AI', 'Learn Python, LLMs, LangChain, and Prompt Engineering to build modern AI solutions.', '4 Months', 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Module 1: Python for AI", "topics": ["Advanced Python Syntax", "NumPy and Pandas for Data Manipulation", "PyTorch Fundamentals", "Data Preprocessing Techniques"]}, {"title": "Module 2: Large Language Models", "topics": ["Transformer Architecture", "Hugging Face Ecosystem", "Fine-tuning Foundations", "Prompt Engineering Mastery"]}, {"title": "Module 3: AI Application Engineering", "topics": ["LangChain Framework", "Vector Databases (Pinecone/Chroma)", "RAG (Retrieval Augmented Generation)", "Deploying AI Models with FastAPI"]}]}'),
-('DevOps & Cloud Engineering', 'Deep dive into Docker, Kubernetes, AWS, and CI/CD pipelines for modern infrastructure.', '5 Months', 'https://images.unsplash.com/photo-1618401471353-b98aadebc25a?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Module 1: Infrastructure & Containers", "topics": ["Linux Administration", "Containerization with Docker", "Container Orchestration with Kubernetes", "Helm Charts"]}, {"title": "Module 2: Cloud Mastery (AWS)", "topics": ["EC2, S3, and VPC Architecture", "Serverless with AWS Lambda", "IAM Security Best Practices", "CloudWatch Monitoring"]}, {"title": "Module 3: CI/CD & Automation", "topics": ["Jenkins and GitHub Actions", "Infrastructure as Code (Terraform)", "Configuration Management (Ansible)", "DevSecOps Fundamentals"]}]}'),
-('SAP ERP Solutions', 'Comprehensive training on SAP modules, business processes, and enterprise resource planning.', '6 Months', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Module 1: SAP Ecosystem", "topics": ["Introduction to ERP", "SAP Architecture (ECC vs S/4HANA)", "Navigation and User Interface", "Organizational Structures"]}, {"title": "Module 2: Functional Modules", "topics": ["Financial Accounting (FI)", "Sales and Distribution (SD)", "Materials Management (MM)", "Human Capital Management (HCM)"]}, {"title": "Module 3: ABAP & Customization", "topics": ["ABAP Programming Basics", "Data Dictionary", "Reports and Interfaces", "SAP Fiori Modern UX"]}]}');
+-- Insert Training Programs (Courses & Internships)
+INSERT INTO courses (title, description, duration, image, syllabus, career_opportunities) VALUES 
+('Python and Generative AI Internship', 'Build a strong foundation in Python and master Generative AI to create intelligent applications and chatbots.', '3 Months', 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Python Fundamentals", "topics": ["Data types and structures", "Conditional statements and loops", "Functions and modular programming", "Python modules and libraries", "Parallel processing"]}, {"title": "Generative AI", "topics": ["Introduction to LLMs", "Prompt engineering techniques", "AI chatbot development", "AI content generation systems", "AI API integration"]}]}', 'Python Developer, Data Analyst, AI Scientist, AI Application Developer'),
+
+('Python and Automation with AI Testing', 'Focus on Python-based automation for industrial use cases, including data automation and AI-based testing.', '3 Months', 'https://images.unsplash.com/photo-1551288049-bbbda536639a?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Python & Data", "topics": ["Python programming fundamentals", "Data analytics fundamentals", "Database integration"]}, {"title": "Automation & AI Testing", "topics": ["Desktop UI design for automation", "Web scraping technologies", "Document intelligence processing", "AI-based testing use cases"]}]}', 'Python Developer, Automation Engineer, Data Analyst, AI Testing Engineer'),
+
+('Python, Generative AI, and Agentic AI', 'Advanced program combining Gen AI with autonomous agents and multi-agent collaboration frameworks.', '4 Months', 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Agentic AI Core", "topics": ["Large Language Models", "AI agent architecture", "Autonomous AI systems", "Multi-agent collaboration"]}, {"title": "Implementation", "topics": ["AI workflow automation", "Tool integration with AI agents", "CrewAI and LangChain Agents"]}]}', 'Python Developer, AI Engineer, Machine Learning Engineer, Prompt Engineer'),
+
+('Python Full-Stack Development', 'Build modern web applications using Django/FastAPI for backend and React for frontend.', '6 Months', 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Backend Mastery", "topics": ["Django and FastAPI frameworks", "REST API development", "Authentication and security", "Database design"]}, {"title": "Frontend Integration", "topics": ["React and Streamlit", "Git and GitHub", "API consumption"]}]}', 'Python Developer, Backend Engineer, Full Stack Developer, Web Application Developer'),
+
+('DevOps Engineering', 'Master deployment automation, infrastructure management, and CI/CD workflows.', '5 Months', 'https://images.unsplash.com/photo-1618401471353-b98aadebc25a?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Infrastructure & CI/CD", "topics": ["Git and Jenkins", "GitHub Actions", "Terraform", "Monitoring with Prometheus"]}, {"title": "Containers & Cloud", "topics": ["Docker containerization", "Kubernetes orchestration", "AWS Cloud platforms"]}]}', 'DevOps Engineer, Cloud Engineer, Infrastructure Engineer, Platform Engineer'),
+
+('Cybersecurity – Ethical Hacking Training', 'Learn cybersecurity principles and ethical hacking techniques to prevent security vulnerabilities.', '4 Months', 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Security Fundamentals", "topics": ["Networking concepts", "Vulnerability assessment", "Web application security", "Security tools"]}, {"title": "Ethical Hacking", "topics": ["Penetration testing", "Kali Linux and Shell scripting", "Splunk"]}]}', 'Ethical Hacker, Cybersecurity Analyst, Security Consultant, Penetration Tester'),
+
+('UI/UX and React Development Training', 'Focus on modern frontend development and user experience design using React and design tools.', '4 Months', 'https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "UI/UX Design", "topics": ["Wireframing and prototyping", "Figma and Adobe XD", "UX design fundamentals"]}, {"title": "React Development", "topics": ["JSX and components", "React hooks", "State management with Redux", "Tailwind CSS"]}]}', 'Frontend Developer, React Developer, Web Developer, UI Developer'),
+
+('Microsoft Azure Training', 'Learn cloud computing concepts and Microsoft Azure services for application management.', '3 Months', 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Azure Core", "topics": ["Cloud fundamentals", "Virtual machines", "Azure storage and networking"]}, {"title": "Azure DevOps", "topics": ["Azure security", "Monitoring and management", "Cloud automation"]}]}', 'Azure Cloud Engineer, Cloud Administrator, DevOps Engineer, Cloud Solutions Architect'),
+
+('AWS Training Program', 'Practical knowledge of Amazon Web Services and cloud infrastructure deployment.', '3 Months', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "AWS Infrastructure", "topics": ["EC2 and S3 services", "VPC and networking", "IAM and Security"]}, {"title": "Cloud Engineering", "topics": ["Infrastructure as Code with Terraform", "CloudWatch monitoring", "Cloud Administrator"]}]}', 'AWS Cloud Engineer, Cloud Solutions Architect, DevOps Engineer, Cloud Administrator'),
+
+('Selenium and AI-Driven Testing Training', 'Software testing automation using Selenium along with AI-driven testing tools.', '3 Months', 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Selenium Automation", "topics": ["WebDriver automation", "Test automation frameworks", "TestNG and JUnit"]}, {"title": "AI & CI/CD", "topics": ["AI-assisted testing tools", "Jenkins for CI/CD", "Playwright framework"]}]}', 'QA Automation Engineer, Software Test Engineer, Test Automation Architect'),
+
+('Salesforce Training Program', 'Salesforce CRM administration, customization, and application development.', '4 Months', 'https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Salesforce Admin", "topics": ["CRM fundamentals", "Objects and fields", "Workflows and automation"]}, {"title": "Salesforce Dev", "topics": ["Apex programming", "Lightning components", "SOQL"]}]}', 'Salesforce Developer, Salesforce Administrator, CRM Consultant'),
+
+('SAP Training Program', 'Enterprise resource planning (ERP) and business process integration using SAP systems.', '6 Months', 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "SAP Core", "topics": ["ERP fundamentals", "SAP architecture", "SAP modules overview"]}, {"title": "Integration", "topics": ["Business process integration", "SAP configuration", "Reporting and analytics", "SAP HANA"]}]}', 'SAP Consultant, SAP Functional Analyst, ERP Specialist'),
+
+('Java Full Stack Development Internship', 'Master enterprise-level application development using Java, Spring Boot, and React.', '6 Months', 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "Java Backend", "topics": ["Core Java and OOP", "Spring Boot framework", "Hibernate and JPA", "REST API security"]}, {"title": "Frontend & DevOps", "topics": ["React UI framework", "Maven and Docker", "Maven and Grade", "Git and GitHub"]}]}', 'Java Developer, Backend Developer, Full Stack Developer, Enterprise Application Developer'),
+
+('JavaScript Full Stack Development Internship', 'Modern web application development using Node.js, Express, and React.', '6 Months', 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop', '{"modules": [{"title": "JavaScript Mastery", "topics": ["ES6+ fundamentals", "Async programming", "React.js frontend"]}, {"title": "Backend Engineering", "topics": ["Node.js and Express", "MongoDB and SQL", "REST API development"]}]}', 'JavaScript Developer, Full Stack Developer, Frontend Developer, Backend Developer (Node.js)');
 
 -- Insert Initial Job Openings
 INSERT INTO jobs (title, company, location, type, description) VALUES 
 ('Senior Java Developer', 'Cloudfare Technologies', 'Hyderabad, India', 'Full-time', 'Seeking an experienced Java developer with expertise in Spring Boot and Microservices.'),
-('AI Engineer', 'Cloudfare Technologies', 'Remote', 'Full-time', 'Build and deploy generative AI models using Python and modern frameworks.');
+('AI Engineer', 'Cloudfare Technologies', 'Remote', 'Full-time', 'Build and deploy generative AI models using Python and modern frameworks.'),
+('Python Full Stack Developer', 'Propel Systems', 'Hyderabad', 'Full-time', 'Build scalable web applications using Django backend and React frontend.'),
+('DevOps Engineer', 'CloudScale Solutions', 'Bangalore', 'Full-time', 'Manage enterprise cloud infrastructure and CI/CD pipelines on AWS.'),
+('Cybersecurity Analyst', 'SafeGuard Network', 'Remote', 'Full-time', 'Conduct vulnerability assessments and secure mission-critical enterprise systems.'),
+('UI/UX Designer', 'VitalsIQ', 'Hyderabad', 'Full-time', 'Design intuitive user interfaces and prototypes for global-scale web and mobile apps.');
 
 -- Insert Initial Internship Programs
 INSERT INTO internships (title, duration, location, description) VALUES 
 ('Full Stack Web Internship', '3 Months', 'Hyderabad / Remote', 'Work on live client projects using React and Node.js.'),
-('Python for Data Science Internship', '4 Months', 'Bangalore', 'Learn data analysis and visualization with real-world datasets.');
+('Python for Data Science Internship', '4 Months', 'Bangalore', 'Learn data analysis and visualization with real-world datasets.'),
+('Generative AI Internship', '3 Months', 'Remote', 'Research and develop autonomous AI agents and LLM-driven integrations.'),
+('Cybersecurity Internship', '4 Months', 'Hyderabad', 'Hands-on training in ethical hacking, penetration testing, and network security.'),
+('React Frontend Internship', '3 Months', 'Remote', 'Build modern interactive user interfaces using React.js and Tailwind CSS.'),
+('Salesforce Administrator Internship', '4 Months', 'Bangalore', 'Manage enterprise CRM workflows, dashboards, and cloud configurations.');
 
 -- Insert Testimonials
 INSERT INTO testimonials (name, role, company, content, avatar_url) VALUES 

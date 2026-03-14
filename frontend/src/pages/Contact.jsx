@@ -57,8 +57,8 @@ const Contact = () => {
                                 <ContactDetail
                                     icon={<MapPin className="text-emerald-500" />}
                                     title="Visit Us"
-                                    text={<>SS tech park, SLN terminus 8th floor, Gachibowli, <br />Hyderabad, Telangana, 500032</>}
-                                    sub="Main Global HQ"
+                                    text={<>SS tech park, SLN terminus 8th floor, Gachibowli, <br />Hyderabad, 500032</>}
+                                    sub="Telangana"
                                 />
                             </div>
 
