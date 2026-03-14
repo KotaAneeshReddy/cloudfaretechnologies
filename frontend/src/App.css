@@ -1,0 +1,12 @@
+/* Main App styles */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-purple to-accent-blue;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-accent-purple text-white rounded-lg font-medium hover:bg-accent-purple-dark transition-colors;
+}
+
+.card {
+  @apply bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow;
+}
