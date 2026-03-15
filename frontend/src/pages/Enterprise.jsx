@@ -17,8 +17,8 @@ const Enterprise = () => {
             <Sparkles size={14} className="mr-2" />
             Architecting the Future
           </motion.div>
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-10 font-display tracking-tight leading-tight text-white overflow-visible pr-10">
-            Elite Technology <br /><span className="gradient-text italic inline-block pr-4">Solutions</span>
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-10 font-display tracking-tight leading-tight text-white overflow-visible">
+            Elite Technology <br /><span className="gradient-text italic inline-block pr-2 md:pr-4">Solutions</span>
           </h1>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
             Leading enterprises trust Cloudfare Technologies to build scalable infrastructure,

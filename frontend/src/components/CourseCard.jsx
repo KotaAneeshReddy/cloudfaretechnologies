@@ -39,16 +39,16 @@ const CourseCard = ({ course, onEnroll }) => {
           {course.description}
         </p>
         
-        <div className="flex items-center justify-between py-4 border-y border-slate-50">
+        <div className="flex items-center justify-between py-2 border-y border-slate-50">
           <div className="flex items-center space-x-2 text-slate-400">
-            <Clock size={16} />
-            <span className="text-xs font-medium">Flexible & Self-Paced</span>
+            <Clock size={14} />
+            <span className="text-[10px] font-bold uppercase tracking-wider">Flexible & Self-Paced</span>
           </div>
         </div>
       </div>
 
       {/* Buttons */}
-      <div className="pt-8 mt-auto grid grid-cols-2 gap-4">
+      <div className="pt-4 mt-auto grid grid-cols-2 gap-4">
         <button 
           onClick={() => navigate(`/course/${course.id}`)}
           className="btn-secondary !rounded-xl !py-3 !text-xs uppercase tracking-widest"

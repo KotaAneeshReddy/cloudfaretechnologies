@@ -25,7 +25,11 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                         "http://localhost:5173",
                         "http://138.252.200.212",
-                        "http://138.252.200.212:8080")
+                        "http://138.252.200.212:8080",
+                        "http://cloudfaretechnologies.com",
+                        "http://www.cloudfaretechnologies.com",
+                        "http://cloudfaretechnologies.com:8080",
+                        "http://www.cloudfaretechnologies.com:8080")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);

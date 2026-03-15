@@ -40,7 +40,7 @@ const Navbar = () => {
                 <span className="text-2xl font-black text-white tracking-[0.02em] uppercase font-display">
                   CLOUD<span className="text-accent-blue">FARE</span>
                 </span>
-                <span className="text-[9px] font-bold text-slate-400 tracking-[0.78em] uppercase mt-1">
+                <span className="text-[9px] font-bold text-slate-400 tracking-[0.85em] uppercase mt-1">
                   TECHNOLOGIES
                 </span>
               </div>

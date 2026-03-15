@@ -117,12 +117,12 @@ const Contact = () => {
                                 <MessageSquare size={20} />
                                 <span className="font-bold text-sm uppercase tracking-widest">Send a Message</span>
                             </div>
-                            <h3 className="text-4xl font-bold mb-12 font-display leading-[1.1]">Let's Start a <span className="text-accent-blue">Conversation.</span></h3>
+                            <h3 className="text-3xl md:text-4xl font-bold mb-12 font-display leading-[1.1]">Let's Start a <span className="text-accent-blue">Conversation.</span></h3>
 
                             <form onSubmit={handleSubmit} className="space-y-10">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                     <div className="space-y-4">
-                                        <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1">Full Name</label>
+                                        <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1 block">Full Name</label>
                                         <input
                                             required
                                             name="name"
@@ -135,7 +135,7 @@ const Contact = () => {
                                         {errors.name && <p className="text-red-500 text-xs font-bold mt-1 ml-1">{errors.name}</p>}
                                     </div>
                                     <div className="space-y-4">
-                                        <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1">Email Address</label>
+                                        <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1 block">Email Address</label>
                                         <input
                                             required
                                             name="email"
@@ -150,7 +150,7 @@ const Contact = () => {
                                 </div>
 
                                 <div className="space-y-4">
-                                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1">Subject</label>
+                                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1 block">Subject</label>
                                     <select
                                         name="subject"
                                         value={formData.subject}
@@ -163,7 +163,7 @@ const Contact = () => {
                                 </div>
 
                                 <div className="space-y-4">
-                                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1">Message</label>
+                                    <label className="text-sm font-bold text-slate-700 uppercase tracking-wider ml-1 block">Message</label>
                                     <textarea
                                         required
                                         name="message"

@@ -68,12 +68,12 @@ const Home = () => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
   return (
-    <div className="pb-20 bg-bg-light">
+    <div className="pb-10 bg-bg-light">
       <Hero />
 
       {/* Stats Section - Premium Version */}
       <section className="relative z-10 -mt-16 mb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-[32px] shadow-premium border border-slate-100 p-10 md:p-16 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+        <div className="bg-white rounded-[32px] shadow-premium border border-slate-100 p-10 md:p-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 text-center">
           <StatItem value="1,250+" label="Students Trained" color="text-accent-purple" />
           <StatItem value="100+" label="Job Placements" color="text-accent-blue-dark" />
           <StatItem value="70+" label="Active Interns" color="text-emerald-500" />
@@ -140,8 +140,8 @@ const Home = () => {
             >
               Industry Partnerships
             </motion.div>
-            <h2 className="text-3xl md:text-4xl font-black text-primary-navy font-display tracking-tight leading-tight">
-              Empowering Careers at <span className="gradient-text italic px-2">Global Leaders</span>
+            <h2 className="text-3xl md:text-5xl font-black text-primary-navy font-display tracking-tight leading-tight">
+              Empowering Careers at <span className="gradient-text italic px-1 md:px-2 inline-block">Global Leaders</span>
             </h2>
           </div>
 
@@ -156,7 +156,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section - Dynamic Carousel */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+      <section className="max-w-7xl mx-auto px-4 mb-10 sm:px-6 lg:px-8">
         <div className="bg-primary-navy rounded-3xl py-16 px-6 md:px-12 text-white relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 left-0 w-full h-full opacity-10">
             <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent-blue blur-[120px] rounded-full"></div>
@@ -177,20 +177,30 @@ const Home = () => {
               <h2 className="text-2xl md:text-3xl font-extrabold mb-4 font-display text-white px-2">Our Alumni <span className="gradient-text italic px-1">Impact</span></h2>
             </div>
 
-            <div className="relative min-h-[220px] flex items-center">
+            <div className="relative min-h-[280px] w-full flex flex-col items-center justify-center">
               {loading ? (
                 <div className="w-full text-center py-10">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-blue mx-auto"></div>
                 </div>
               ) : testimonials.length > 0 ? (
                 <>
-                  <div className="w-full bg-white/5 backdrop-blur-sm rounded-[32px] p-6 md:p-8 border border-white/10">
+                  <div className="w-full bg-white/5 backdrop-blur-sm rounded-[32px] p-6 md:p-8 border border-white/10 touch-none">
                     <motion.div
                       key={currentIndex}
                       initial={{ opacity: 0, scale: 0.98 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.98 }}
-                      className="space-y-4 text-center"
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      onDragEnd={(e, { offset, velocity }) => {
+                        const swipeThreshold = 50;
+                        if (offset.x < -swipeThreshold) {
+                          nextTestimonial();
+                        } else if (offset.x > swipeThreshold) {
+                          prevTestimonial();
+                        }
+                      }}
+                      className="space-y-4 text-center cursor-grab active:cursor-grabbing"
                     >
                       {/* <div className="flex justify-center mb-4">
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent-purple to-accent-blue p-0.5">
@@ -221,19 +231,21 @@ const Home = () => {
                   </div>
 
                   {/* Navigation Controls */}
-                  <div className="absolute top-1/2 -left-6 md:-left-20 -translate-y-1/2">
+                  <div className="absolute top-1/2 -left-4 md:-left-20 lg:-left-24 -translate-y-1/2 hidden md:block">
                     <button onClick={prevTestimonial} className="p-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-colors">
                       <ChevronLeft size={20} />
                     </button>
                   </div>
-                  <div className="absolute top-1/2 -right-6 md:-right-20 -translate-y-1/2">
+                  <div className="absolute top-1/2 -right-4 md:-right-20 lg:-right-24 -translate-y-1/2 hidden md:block">
                     <button onClick={nextTestimonial} className="p-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-colors">
                       <ChevronRight size={20} />
                     </button>
                   </div>
 
+                  {/* Mobile Navigation hidden as per user preference for swiping */}
+
                   {/* Dots */}
-                  <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 flex space-x-2">
+                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-2">
                     {testimonials.map((_, idx) => (
                       <button
                         key={idx}
@@ -361,7 +373,7 @@ const PillarCard = ({ icon, title, desc, color, link, delay }) => (
       </div>
       <h3 className="text-2xl font-bold mb-4 font-display">{title}</h3>
       <p className="text-slate-500 text-base leading-relaxed mb-8">{desc}</p>
-      <div className="text-accent-purple font-bold text-sm flex items-center space-x-2 group/link">
+      <div className="text-accent-purple font-bold text-sm flex items-center justify-center lg:justify-start space-x-2 group/link">
         <span className="group-hover/link:mr-2 transition-all uppercase tracking-wider">Learn More</span>
         <ArrowRight size={16} />
       </div>

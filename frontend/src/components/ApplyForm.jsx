@@ -123,7 +123,7 @@ const ApplyForm = ({ isOpen, onClose, jobTitle, jobId, internshipId }) => {
                 <form onSubmit={handleSubmit} className="p-8 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center">
+                      <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center text-left">
                         <User size={14} className="mr-2" /> Full Name
                       </label>
                       <input
@@ -137,7 +137,7 @@ const ApplyForm = ({ isOpen, onClose, jobTitle, jobId, internshipId }) => {
                       {errors.name && <p className="text-red-500 text-xs font-bold mt-1 ml-1">{errors.name}</p>}
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center">
+                      <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center text-left">
                         <Mail size={14} className="mr-2" /> Email Address
                       </label>
                       <input

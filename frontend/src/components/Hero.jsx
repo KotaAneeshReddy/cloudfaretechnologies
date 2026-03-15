@@ -28,10 +28,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tighter mb-10 leading-[1.1] overflow-visible pr-10"
+            className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white tracking-tighter mb-10 leading-[1.1] overflow-visible"
           >
             Elevate Your Career <br />
-            <span className="gradient-text italic inline-block pr-4">Through Innovation</span>
+            <span className="gradient-text italic inline-block pr-2 md:pr-4">Through Innovation</span>
           </motion.h1>
 
           <motion.p

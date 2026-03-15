@@ -96,7 +96,7 @@ const EnrollForm = ({ isOpen, onClose, courseName }) => {
                 <form onSubmit={handleSubmit} className="p-8 space-y-6">
                   <div className="space-y-4">
                     <div className="space-y-2">
-                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center text-left">
                         <User size={14} className="mr-2" /> Full Name
                         </label>
                         <input
@@ -111,7 +111,7 @@ const EnrollForm = ({ isOpen, onClose, courseName }) => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center text-left">
                         <Mail size={14} className="mr-2" /> Email Address
                         </label>
                         <input
@@ -126,7 +126,7 @@ const EnrollForm = ({ isOpen, onClose, courseName }) => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest flex items-center text-left">
                         <Phone size={14} className="mr-2" /> Phone Number
                         </label>
                         <input

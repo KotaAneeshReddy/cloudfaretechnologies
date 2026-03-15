@@ -20,7 +20,7 @@ const Footer = () => {
                 <span className="text-2xl font-black text-white tracking-[0.02em] uppercase font-display">
                   CLOUD<span className="text-accent-blue">FARE</span>
                 </span>
-                <span className="text-[9px] font-bold text-slate-400 tracking-[0.78em] uppercase mt-1">
+                <span className="text-[9px] font-bold text-slate-400 tracking-[0.85em] uppercase mt-1">
                   TECHNOLOGIES
                 </span>
               </div>
@@ -69,9 +69,9 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-sm">
+        <div className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-sm text-center md:text-left">
           <p>© {new Date().getFullYear()} Cloudfare Technologies Pvt Ltd. All rights reserved.</p>
-          <div className="flex space-x-8">
+          <div className="flex space-x-8 justify-center md:justify-end">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>

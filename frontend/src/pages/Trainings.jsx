@@ -46,9 +46,9 @@ const Trainings = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-extrabold text-primary-navy mb-8 font-display leading-[1.1] overflow-visible pr-10"
+            className="text-4xl md:text-6xl font-extrabold text-primary-navy mb-8 font-display leading-[1.1] overflow-visible"
           >
-            Elite Training <span className="gradient-text italic inline-block pr-4">Programs</span>
+            Elite Training <span className="gradient-text italic inline-block pr-2 md:pr-4">Programs</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}

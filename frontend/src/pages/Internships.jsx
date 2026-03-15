@@ -134,12 +134,12 @@ const Internships = () => {
 };
 
 const InternBenefit = ({ icon, title, desc }) => (
-  <div className="space-y-6 group">
+  <div className="space-y-4 group flex flex-col items-start text-left">
     <div className="w-16 h-16 bg-white rounded-2xl shadow-premium border border-slate-50 flex items-center justify-center group-hover:bg-accent-blue group-hover:text-white group-hover:scale-110 transition-all duration-300">
       {icon}
     </div>
     <div className="space-y-2">
-        <h4 className="font-bold text-xl font-display group-hover:text-accent-blue transition-colors">{title}</h4>
+        <h4 className="font-bold text-xl font-display group-hover:text-accent-blue transition-colors tracking-tight">{title}</h4>
         <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
     </div>
   </div>
