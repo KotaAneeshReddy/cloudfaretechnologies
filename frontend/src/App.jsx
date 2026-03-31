@@ -16,6 +16,11 @@ import ScrollToTop from './components/ScrollToTop';
 import PageTransition from './components/PageTransition';
 import { AnimatePresence } from 'framer-motion';
 
+// Admin Imports
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
+import ProtectedRoute from './components/ProtectedRoute';
+
 function AnimatedRoutes() {
   const location = useLocation();
   
@@ -33,8 +38,36 @@ function AnimatedRoutes() {
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
         <Route path="/terms-and-conditions" element={<PageTransition><TermsAndConditions /></PageTransition>} />
+        
+        {/* Admin Routes */}
+        <Route path="/admin/login" element={<PageTransition><AdminLogin /></PageTransition>} />
+        <Route 
+          path="/admin/dashboard" 
+          element={
+            <ProtectedRoute>
+              <PageTransition>
+                <AdminDashboard />
+              </PageTransition>
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
     </AnimatePresence>
+  );
+}
+
+function Layout() {
+  const location = useLocation();
+  const isAdminPath = location.pathname.startsWith('/admin');
+
+  return (
+    <>
+      {!isAdminPath && <Navbar />}
+      <main>
+        <AnimatedRoutes />
+      </main>
+      {!isAdminPath && <Footer />}
+    </>
   );
 }
 
@@ -43,11 +76,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <div className="min-h-screen bg-bg-light text-primary-navy">
-        <Navbar />
-        <main>
-          <AnimatedRoutes />
-        </main>
-        <Footer />
+        <Layout />
       </div>
     </Router>
   );

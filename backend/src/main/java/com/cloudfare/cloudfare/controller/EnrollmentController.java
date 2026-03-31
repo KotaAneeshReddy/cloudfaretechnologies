@@ -4,6 +4,7 @@ import com.cloudfare.cloudfare.model.Enrollment;
 import com.cloudfare.cloudfare.repository.EnrollmentRepository;
 import com.cloudfare.cloudfare.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
@@ -20,6 +21,12 @@ public class EnrollmentController {
 
     @Autowired
     private EmailService emailService;
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
+    public java.util.List<Enrollment> getAllEnrollments() {
+        return enrollmentRepository.findAll();
+    }
 
     @PostMapping
     public ResponseEntity<?> enrollInProgram(@RequestBody Enrollment enrollment) {
@@ -45,12 +52,18 @@ public class EnrollmentController {
                 savedEnrollment.getId()
             );
             
-            emailService.sendEmail("info@cloudfaretechnologies.com", subject, body);
+            emailService.sendEmail("hrmanager@cloudfaretechnologies.com", subject, body);
             
             return ResponseEntity.ok(savedEnrollment);
         } catch (Exception e) {
             logger.error("Error processing enrollment", e);
             return ResponseEntity.internalServerError().body("Failed to process enrollment");
         }
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public void deleteEnrollment(@PathVariable("id") Long id) {
+        enrollmentRepository.deleteById(id);
     }
 }

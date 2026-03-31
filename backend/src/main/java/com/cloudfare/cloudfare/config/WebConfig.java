@@ -29,7 +29,11 @@ public class WebConfig implements WebMvcConfigurer {
                         "http://cloudfaretechnologies.com",
                         "http://www.cloudfaretechnologies.com",
                         "http://cloudfaretechnologies.com:8080",
-                        "http://www.cloudfaretechnologies.com:8080")
+                        "http://www.cloudfaretechnologies.com:8080",
+                        "https://cloudfaretechnologies.com",
+                        "https://www.cloudfaretechnologies.com",
+                        "https://cloudfaretechnologies.com:8080",
+                        "https://www.cloudfaretechnologies.com:8080")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
