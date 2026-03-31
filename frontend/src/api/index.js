@@ -51,6 +51,12 @@ export const deleteApplication = (id) => api.delete(`/applications/${id}`);
 export const getEnrollments = () => api.get('/enrollments');
 export const deleteEnrollment = (id) => api.delete(`/enrollments/${id}`);
 
+// Settings
+export const getSettings = () => api.get('/settings');
+export const createSetting = (data) => api.post('/settings', data);
+export const updateSetting = (id, data) => api.put(`/settings/${id}`, data);
+export const deleteSetting = (id) => api.delete(`/settings/${id}`);
+
 export const submitApplication = (applicationData) => api.post('/applications', applicationData);
 export const sendContactMessage = (data) => api.post('/contact', data);
 export const enrollInProgram = (data) => api.post('/enrollments', data);

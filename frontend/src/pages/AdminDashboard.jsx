@@ -4,12 +4,13 @@ import {
   getJobs, createJob, updateJob, deleteJob,
   getInternships, createInternship, updateInternship, deleteInternship,
   getApplications, deleteApplication,
-  getEnrollments, deleteEnrollment
+  getEnrollments, deleteEnrollment,
+  getSettings, createSetting, updateSetting, deleteSetting
 } from '../api';
 import { 
   Plus, Edit, Trash2, Search, Filter, 
   BookOpen, Briefcase, GraduationCap, Users, UserCheck, 
-  LogOut, ChevronRight, X, Save
+  LogOut, ChevronRight, X, Save, Settings
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -28,25 +29,28 @@ const AdminDashboard = () => {
     { id: 'internships', label: 'Internships', icon: GraduationCap },
     { id: 'applications', label: 'Applications', icon: Users },
     { id: 'enrollments', label: 'Enrollments', icon: UserCheck },
+    { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   useEffect(() => {
+    console.log('Active tab changed to:', activeTab);
     fetchData();
   }, [activeTab]);
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      let res;
+      let res = { data: [] };
       switch (activeTab) {
         case 'courses': res = await getCourses(); break;
         case 'jobs': res = await getJobs(); break;
         case 'internships': res = await getInternships(); break;
         case 'applications': res = await getApplications(); break;
         case 'enrollments': res = await getEnrollments(); break;
+        case 'settings': res = await getSettings(); break;
         default: break;
       }
-      setData(res.data);
+      setData(res?.data || []);
     } catch (err) {
       console.error('Error fetching data:', err);
     } finally {
@@ -81,6 +85,7 @@ const AdminDashboard = () => {
         case 'internships': await deleteInternship(id); break;
         case 'applications': await deleteApplication(id); break;
         case 'enrollments': await deleteEnrollment(id); break;
+        case 'settings': await deleteSetting(id); break;
       }
       fetchData();
     } catch (err) {
@@ -96,12 +101,14 @@ const AdminDashboard = () => {
           case 'courses': await updateCourse(editingItem.id, formData); break;
           case 'jobs': await updateJob(editingItem.id, formData); break;
           case 'internships': await updateInternship(editingItem.id, formData); break;
+          case 'settings': await updateSetting(editingItem.id, formData); break;
         }
       } else {
         switch (activeTab) {
           case 'courses': await createCourse(formData); break;
           case 'jobs': await createJob(formData); break;
           case 'internships': await createInternship(formData); break;
+          case 'settings': await createSetting(formData); break;
         }
       }
       setIsModalOpen(false);
@@ -124,6 +131,7 @@ const AdminDashboard = () => {
       case 'internships': return ['Title', 'Duration', 'Location'];
       case 'applications': return ['Name', 'Email', 'Job/Internship', 'Applied At'];
       case 'enrollments': return ['Name', 'Email', 'Program', 'Date'];
+      case 'settings': return ['Key', 'Value', 'Description'];
       default: return [];
     }
   };
@@ -179,6 +187,17 @@ const AdminDashboard = () => {
             </td>
           </>
         );
+      case 'settings':
+        return (
+          <>
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.settingKey || 'N/A'}</td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {item.settingKey?.includes('PASSWORD') ? '********' : (item.settingValue || 'N/A')}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.description || 'N/A'}</td>
+          </>
+        );
+      default: return <td>Unknown Case</td>;
     }
   };
 
@@ -271,6 +290,30 @@ const AdminDashboard = () => {
             </div>
           </div>
         );
+      case 'settings':
+        return (
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Setting Key</label>
+              <input 
+                type="text" 
+                value={formData.settingKey || ''} 
+                onChange={e => setFormData({...formData, settingKey: e.target.value})} 
+                className={commonClasses} 
+                required 
+                disabled={!!editingItem}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Setting Value</label>
+              <textarea value={formData.settingValue || ''} onChange={e => setFormData({...formData, settingValue: e.target.value})} className={commonClasses} rows={3} />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Description</label>
+              <input type="text" value={formData.description || ''} onChange={e => setFormData({...formData, description: e.target.value})} className={commonClasses} />
+            </div>
+          </div>
+        );
       default: return null;
     }
   };
@@ -322,7 +365,7 @@ const AdminDashboard = () => {
               </h2>
               <p className="text-gray-500">Add, edit, or remove {activeTab} stored in the database.</p>
             </div>
-            {['courses', 'jobs', 'internships'].includes(activeTab) && (
+            {['courses', 'jobs', 'internships', 'settings'].includes(activeTab) && (
               <button 
                 onClick={handleCreate}
                 className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
@@ -381,7 +424,7 @@ const AdminDashboard = () => {
                         {renderRow(item)}
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <div className="flex justify-end gap-2">
-                            {['courses', 'jobs', 'internships'].includes(activeTab) && (
+                            {['courses', 'jobs', 'internships', 'settings'].includes(activeTab) && (
                               <button onClick={() => handleEdit(item)} className="p-1 text-blue-600 hover:bg-blue-50 rounded transition">
                                 <Edit className="w-5 h-5" />
                               </button>
