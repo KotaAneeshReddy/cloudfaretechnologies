@@ -52,7 +52,7 @@ public class EnrollmentController {
                 savedEnrollment.getId()
             );
             
-            emailService.sendEmail("hrmanager@cloudfaretechnologies.com", subject, body);
+            emailService.sendEmail("info@cloudfaretechnologies.com", subject, body);
             
             return ResponseEntity.ok(savedEnrollment);
         } catch (Exception e) {
